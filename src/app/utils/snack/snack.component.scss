@@ -1,0 +1,62 @@
+$breakpoint-sm: 575.98px;
+$breakpoint-md: 767.98px;
+$breakpoint-lg: 991.98px;
+$breakpoint-xl: 1199.98px;
+
+.a-snack {
+  $bg-color: #15843c;
+  $color-white: #fff;
+  $color-black: #000;
+
+  position: fixed;
+  bottom: 40px;
+  left: 1rem;
+  text-align: center;
+  background-color: rgba($color: $bg-color, $alpha: 0.95);
+  border-radius: 20px;
+  padding: 20px;
+  min-width: 250px;
+  color: $color-white;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: -8px 10px 20px -7px rgba($color: $color-black, $alpha: 0.75);
+  visibility: hidden;
+  z-index: 15;
+
+  @media (max-width: $breakpoint-sm) {
+    bottom: 20px;
+    left: 50%;
+    margin-left: -125px;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    bottom: 25px;
+  }
+}
+
+.a-snack-show {
+  visibility: visible;
+  animation: fade-in 0.5s, fade-out 0.5s 2.5s;
+}
+
+@keyframes fade-in {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  100% {
+    bottom: 40px;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    bottom: 40px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 0;
+    opacity: 0;
+  }
+}

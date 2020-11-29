@@ -1,0 +1,227 @@
+<app-snack></app-snack>
+
+<div class="a-navbar d-flex align-items-center justify-content-between">
+  <div>
+    <img class="a-navbar-icon" src="./assets/png/Spotify_Icon_RGB_White.png" />
+    <p class="a-navbar-title">Analysis<span>.</span> for Spotify</p>
+  </div>
+  <div class="a-nav-drop">
+    <div
+      class="a-nav-drop-btn"
+      (click)="this.isNavDropOpen = !this.isNavDropOpen"
+    >
+      <img
+        *ngIf="userResult.images.length == 0; else avatarElse"
+        src="./assets/png/avatar.png"
+      />
+      <ng-template #avatarElse>
+        <img [attr.src]="userResult.images[0].url" />
+      </ng-template>
+    </div>
+    <div class="a-nav-drop-content" *ngIf="isNavDropOpen">
+      <span
+        class="spinner-border a-loading d-block mx-auto my-3"
+        *ngIf="userLoading"
+      ></span>
+      <p class="a-drop-username">{{ userResult.display_name }}</p>
+      <p class="a-drop-email">{{ userResult.email }}</p>
+      <button class="btn a-drop-btn" (click)="logoutBtnClicked()">
+        <i class="fas fa-sign-out-alt"></i>
+        Log Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid a-container h-100 py-3">
+  <canvas class="a-mask" id="a-back-canvas"></canvas>
+  <div class="row a-row">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+      <div class="a-col-wrap">
+        <p class="a-col-title">
+          <span>All time top artists:</span>
+        </p>
+        <span
+          class="spinner-border a-loading d-block mx-auto my-3"
+          *ngIf="topArtistsLTLoading"
+        ></span>
+        <div
+          class="a-item a-item-{{ i }}"
+          *ngFor="let artist of topArtistsLT; let i = index"
+        >
+          <a
+            [attr.href]="artist.external_urls.spotify"
+            class="btn a-artist-link"
+          >
+            <img class="a-artist-img" [attr.src]="artist.images[1].url" />
+            <div>
+              <p class="mb-0 a-artist-header text-truncate">
+                {{ artist.name }}
+              </p>
+              <p class="mb-0 a-artist-sub text-truncate">
+                Followers: {{ artist.followers.total | number }}
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 a-margin-fix">
+      <div class="a-col-wrap">
+        <p class="a-col-title">
+          <span>Your favorite genres:</span>
+        </p>
+        <span
+          class="spinner-border a-loading d-block mx-auto my-3"
+          *ngIf="topArtistsLTLoading"
+        ></span>
+        <div class="a-chart-container mx-auto">
+          <canvas id="genreChart" width="200" height="200">
+            <p>Your browser does not support the canvas element.</p>
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 a-margin-fix">
+      <div class="a-col-wrap">
+        <p class="a-col-title">
+          <span>Recent top tracks:</span>
+        </p>
+        <span
+          class="spinner-border a-loading d-block mx-auto my-3"
+          *ngIf="tracksAndFeaturesLoading"
+        ></span>
+        <div
+          class="a-track-item a-track-item-{{ i }}"
+          *ngFor="let track of tracksAndFeatures; let i = index"
+        >
+          <a
+            [attr.href]="track.track.external_urls.spotify"
+            class="btn a-track-link"
+          >
+            <img
+              class="a-track-img"
+              [attr.src]="track.track.album.images[1].url"
+            />
+            <div class="ml-3">
+              <p class="mb-0 a-track-header">{{ track.track.name }}</p>
+              <p class="mb-0 a-track-sub">
+                {{ track.track.artists[0].name }}
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row a-row mt-3">
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+      <div class="a-col-wrap">
+        <p class="a-col-title">
+          <span>For your mood:</span>
+        </p>
+        <span
+          class="spinner-border a-loading d-block mx-auto my-3"
+          *ngIf="moodLoading"
+        ></span>
+        <div class="d-flex a-flex-fix">
+          <div class="a-width-fix d-inline-block">
+            <div
+              class="a-mood-item a-mood-item-{{ i }}"
+              *ngFor="let mood of moodResult; let i = index"
+            >
+              <a
+                [attr.href]="mood.external_urls.spotify"
+                class="a-track-link d-flex align-items-center"
+              >
+                <img
+                  class="a-track-img"
+                  [attr.src]="mood.album.images[1].url"
+                />
+                <div class="ml-3">
+                  <p class="mb-0 a-track-header">{{ mood.name }}</p>
+                  <p class="mb-0 a-track-sub">
+                    {{ mood.artists[0].name }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="a-width-fix d-inline-block">
+            <div
+              class="a-second-mood-item a-second-mood-item-{{ i }}"
+              *ngFor="let mood of secondMoodResult; let i = index"
+            >
+              <a
+                [attr.href]="mood.external_urls.spotify"
+                class="a-track-link d-flex align-items-center"
+              >
+                <img
+                  class="a-track-img"
+                  [attr.src]="mood.album.images[1].url"
+                />
+                <div class="ml-3">
+                  <p class="mb-0 a-track-header">{{ mood.name }}</p>
+                  <p class="mb-0 a-track-sub">
+                    {{ mood.artists[0].name }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 a-playlist-margin-fix">
+      <div class="a-col-wrap">
+        <p class="a-col-title">
+          <span>Featured Playlists:</span>
+        </p>
+        <span
+          class="spinner-border a-loading d-block mx-auto my-3"
+          *ngIf="playlistsLoading"
+        ></span>
+        <div class="d-flex a-flex-fix">
+          <div class="a-width-fix d-inline-block">
+            <div
+              class="a-playlist-item a-playlist-item-{{ i }}"
+              *ngFor="let playlist of playlistResult; let i = index"
+            >
+              <a
+                [attr.href]="playlist.external_urls.spotify"
+                class="a-track-link d-flex align-items-center"
+              >
+                <img class="a-track-img" [attr.src]="playlist.images[0].url" />
+                <div class="ml-3">
+                  <p class="mb-0 a-track-header">{{ playlist.name }}</p>
+                  <p class="mb-0 a-track-sub">
+                    {{ playlist.owner.display_name }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="a-width-fix d-inline-block">
+            <div
+              class="a-second-playlist-item a-second-playlist-item-{{ i }} "
+              *ngFor="let playlist of secondPlaylistResult; let i = index"
+            >
+              <a
+                [attr.href]="playlist.external_urls.spotify"
+                class="a-track-link d-flex align-items-center"
+              >
+                <img class="a-track-img" [attr.src]="playlist.images[0].url" />
+                <div class="ml-3">
+                  <p class="mb-0 a-track-header">{{ playlist.name }}</p>
+                  <p class="mb-0 a-track-sub">
+                    {{ playlist.owner.display_name }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

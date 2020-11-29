@@ -1,0 +1,396 @@
+$breakpoint-sm: 575.98px;
+$breakpoint-md: 767.98px;
+$breakpoint-lg: 991.98px;
+$breakpoint-xl: 1199.98px;
+
+$spotify-green: #1db954;
+$color-white: #fff;
+$color-black: #000;
+
+.a-navbar {
+  background-color: $spotify-green;
+  padding: 10px 30px;
+  position: relative;
+  z-index: 100;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 10px 15px;
+  }
+
+  .a-navbar-icon {
+    opacity: 0;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .a-navbar-title {
+    color: $color-white;
+    font-size: 22px;
+    font-weight: 600;
+    display: inline;
+    vertical-align: middle;
+    opacity: 0;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 20px;
+    }
+
+    span {
+      color: $color-black;
+    }
+  }
+
+  .a-nav-drop {
+    position: relative;
+    display: inline-block;
+
+    .a-nav-drop-btn {
+      cursor: pointer;
+      opacity: 0;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+      }
+    }
+
+    .a-nav-drop-content {
+      $bg-drop: rgba(12, 14, 16, 0.95);
+
+      display: block;
+      min-width: 300px;
+      position: absolute;
+      right: 0;
+      margin-top: 5px;
+      background-color: $bg-drop;
+      color: $color-white;
+      z-index: 100;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: -8px 10px 20px -7px rgba(0, 0, 0, 0.75);
+
+      @media (max-width: $breakpoint-sm) {
+        padding: 12px;
+      }
+
+      .a-drop-username {
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 10px;
+
+        @media (max-width: $breakpoint-sm) {
+          font-size: 20px;
+        }
+      }
+
+      .a-drop-email {
+        $color-grey: #808080;
+
+        text-align: center;
+        color: $color-grey;
+      }
+
+      .a-drop-btn {
+        display: block;
+        color: $color-white;
+        font-size: 16px;
+        width: 100%;
+        text-align: left;
+
+        &:hover {
+          $bg-color: #262626;
+
+          background-color: $bg-color;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        i {
+          vertical-align: middle;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+.a-container {
+  position: relative;
+  z-index: 10;
+
+  .a-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .a-row {
+    // padding: 0 15px;
+
+    .a-margin-fix {
+      @media (max-width: $breakpoint-lg) {
+        margin-top: 1.5rem;
+      }
+    }
+
+    .a-playlist-margin-fix {
+      @media (max-width: $breakpoint-xl) {
+        margin-top: 1.5rem;
+      }
+    }
+
+    .a-col-wrap {
+      $bg-color: #121416;
+
+      background-color: $bg-color;
+      border-radius: 15px;
+      box-shadow: -8px 10px 20px -7px rgba(0, 0, 0, 0.75);
+      color: $color-white;
+      padding: 10px 20px;
+
+      @media (max-width: $breakpoint-sm) {
+        padding: 10px 15px;
+      }
+
+      @media (max-width: $breakpoint-xl) {
+        padding: 10px 15px;
+      }
+
+      .a-col-title {
+        color: $color-white;
+        font-size: 22px;
+        overflow: hidden;
+
+        span {
+          display: block;
+          transform: translateY(100%);
+        }
+
+        @media (max-width: $breakpoint-sm) {
+          font-size: 20px;
+        }
+
+        @media (max-width: $breakpoint-xl) {
+          font-size: 20px;
+        }
+      }
+
+      .a-chart-container {
+        opacity: 0;
+        width: 500px;
+        height: 500px;
+
+        @media (max-width: $breakpoint-sm) {
+          width: 100%;
+          height: 100%;
+        }
+
+        @media (max-width: $breakpoint-xl) {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .a-flex-fix {
+        @media (max-width: $breakpoint-sm) {
+          flex-direction: column;
+        }
+
+        .a-width-fix {
+          width: 50%;
+
+          @media (max-width: $breakpoint-sm) {
+            width: 100%;
+          }
+        }
+      }
+
+      .a-item {
+        opacity: 0;
+      }
+
+      .a-artist-link {
+        color: $color-white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 7px;
+        margin: 5px 0;
+        width: 100%;
+        text-align: left;
+        display: flex;
+
+        &:hover {
+          $bg-color: #262626;
+
+          background-color: $bg-color;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        .a-artist-img {
+          max-width: none;
+          width: 80px;
+          height: 80px;
+          border-radius: 8px;
+          margin-right: 1rem;
+
+          @media (max-width: $breakpoint-sm) {
+            width: 65px;
+            height: 65px;
+          }
+
+          @media (max-width: $breakpoint-xl) {
+            width: 65px;
+            height: 65px;
+          }
+        }
+
+        div {
+          align-self: center;
+          overflow: hidden;
+
+          .a-artist-header {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 500;
+
+            @media (max-width: $breakpoint-sm) {
+              font-size: 18px;
+            }
+
+            @media (max-width: $breakpoint-xl) {
+              font-size: 18px;
+            }
+          }
+
+          .a-artist-sub {
+            $color-grey: #d9d9d9;
+
+            color: $color-grey;
+            margin-top: 3px;
+
+            @media (max-width: $breakpoint-sm) {
+              font-size: 14px;
+            }
+
+            @media (max-width: $breakpoint-xl) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .a-track-item {
+        opacity: 0;
+      }
+
+      .a-mood-item {
+        opacity: 0;
+      }
+
+      .a-second-mood-item {
+        opacity: 0;
+      }
+
+      .a-playlist-item {
+        opacity: 0;
+      }
+
+      .a-second-playlist-item {
+        opacity: 0;
+      }
+
+      .a-track-link {
+        color: $color-white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 7px;
+        margin: 8px 0;
+        margin: 5px 0;
+        width: 100%;
+        text-align: left;
+        display: flex;
+
+        &:hover {
+          $bg-color: #262626;
+
+          background-color: $bg-color;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        .a-track-img {
+          max-width: 80px;
+          width: auto;
+          height: 80px;
+          margin-right: 1rem;
+          border-radius: 8px;
+
+          @media (max-width: $breakpoint-sm) {
+            width: 65px;
+            height: 65px;
+          }
+
+          @media (max-width: $breakpoint-xl) {
+            width: 65px;
+            height: 65px;
+          }
+        }
+
+        div {
+          align-self: center;
+          overflow: hidden;
+
+          .a-track-header {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 500;
+
+            @media (max-width: $breakpoint-sm) {
+              font-size: 18px;
+            }
+
+            @media (max-width: $breakpoint-xl) {
+              font-size: 18px;
+            }
+          }
+
+          .a-track-sub {
+            $color-grey: #d9d9d9;
+
+            color: $color-grey;
+            margin-top: 3px;
+
+            @media (max-width: $breakpoint-sm) {
+              font-size: 14px;
+            }
+
+            @media (max-width: $breakpoint-xl) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
